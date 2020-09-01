@@ -23,6 +23,12 @@ public class GatewayConfiguration {
                             .uri("https://restcountries-v1.p.rapidapi.com")
         )
                 .route(p -> p
+                        .path("/pokemon_names.json")
+                        .filters(f -> f.addRequestHeader("x-rapidapi-host", "pokemon-go1.p.rapidapi.com")
+                                .addRequestHeader(	"x-rapidapi-key", "00ef74d087mshaefe9522e030026p159d49jsn5af7baf07142"))
+                        .uri("https://restcountries-v1.p.rapidapi.com")
+                )
+                .route(p -> p
                         .path("/get")
                         .filters(f -> f.addRequestHeader("Hello", "World"))
                         .uri("http://httpbin.org:80"))
