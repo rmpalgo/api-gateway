@@ -19,13 +19,17 @@ public class GatewayConfiguration {
                 .route(p -> p
                             .path("/all")
                             .filters(f -> f.addRequestHeader("x-rapidapi-host", "restcountries-v1.p.rapidapi.com")
-                                            .addRequestHeader(	"x-rapidapi-key", "00ef74d087mshaefe9522e030026p159d49jsn5af7baf07142"))
+                                            .addRequestHeader(	"x-rapidapi-key", "00ef74d087mshaefe9522e030026p159d49jsn5af7baf07142")
+                                    .hystrix(config -> config.setName("countries-service")
+                                            .setFallbackUri("forward:/countryFallback")))
                             .uri("https://restcountries-v1.p.rapidapi.com")
         )
                 .route(p -> p
                         .path("/pokemon_names.json")
                         .filters(f -> f.addRequestHeader("x-rapidapi-host", "pokemon-go1.p.rapidapi.com")
-                                .addRequestHeader(	"x-rapidapi-key", "00ef74d087mshaefe9522e030026p159d49jsn5af7baf07142"))
+                                .addRequestHeader(	"x-rapidapi-key", "00ef74d087mshaefe9522e030026p159d49jsn5af7baf07142")
+                                .hystrix(config -> config.setName("pokemon-service")
+                                        .setFallbackUri("forward:/pokemonFallback")))
                         .uri("https://restcountries-v1.p.rapidapi.com")
                 )
                 .route(p -> p
